@@ -2,18 +2,23 @@
 PLUGIN_NAME=searchguard-kibana
 PLUGIN_VERSION=5.3.0-2
 KIBANA_VERSION=5.3.0
+KIBANA_NODE_JS_VERSION_URL="https://raw.githubusercontent.com/elastic/kibana/v$KIBANA_VERSION/.node-version"
 echo "Building $PLUGIN_NAME-$PLUGIN_VERSION.zip"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $DIR/..
-git clone https://github.com/elastic/kibana.git
-cd "kibana"
-git checkout tags/v$KIBANA_VERSION
-hash nvm 2>/dev/null || export NVM_DIR=~/.nvm; mkdir -p $NVM_DIR; . $(brew --prefix nvm)/nvm.sh
-nvm install "$(cat .node-version)"
 cd "$DIR"
+#cd $DIR/..
+#git clone https://github.com/elastic/kibana.git
+#cd "kibana"
+#git fetch
+#git checkout tags/v$KIBANA_VERSION
+#hash nvm 2>/dev/null || export NVM_DIR=~/.nvm; mkdir -p $NVM_DIR; . $(brew --prefix nvm)/nvm.sh
+
+echo "Nodejs $(curl -s $KIBANA_NODE_JS_VERSION_URL)"
+nvm install "$(curl -s $KIBANA_NODE_JS_VERSION_URL)"
+
 rm -rf build/
 rm -rf node_modules/
-npm install --save hapi@16.0.1
+#npm install --save hapi@16.0.1
 npm install
 COPYPATH="build/kibana/$PLUGIN_NAME"
 mkdir -p $COPYPATH
