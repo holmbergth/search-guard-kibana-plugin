@@ -37,3 +37,17 @@ mkdir -p releases/$PLUGIN_VERSION/
 cp build/$PLUGIN_NAME-$PLUGIN_VERSION.zip releases/$PLUGIN_VERSION/
 echo "Created releases/$PLUGIN_VERSION/$PLUGIN_NAME-$PLUGIN_VERSION.zip"
 md5sum build/$PLUGIN_NAME-$PLUGIN_VERSION.zip
+
+echo "Uploading build/$PLUGIN_NAME-$PLUGIN_VERSION.zip"
+cresponse=$(curl --write-out %{http_code} --silent --output uploadresult -X POST -F fileUpload=@build/$PLUGIN_NAME-$PLUGIN_VERSION.zip 'https://www.filestackapi.com/api/store/S3?key=Aa30JUUJZQ4i5UPcU5BUHz')
+response="$(echo "$cresponse" | cut -c1-3)"
+
+if ! [[ $response == "200" ]] ; then
+   echo "Upload failed with status $response"
+   exit 1
+fi
+
+echo "Upload response: $response"
+echo "Result upload ############"
+cat uploadresult
+echo "##########################"
