@@ -16,6 +16,7 @@ cd "$DIR"
 echo "Nodejs $(curl -s $KIBANA_NODE_JS_VERSION_URL)"
 nvm install "$(curl -s $KIBANA_NODE_JS_VERSION_URL)"
 
+
 rm -rf build/
 rm -rf node_modules/
 #npm install --save hapi@16.0.1
