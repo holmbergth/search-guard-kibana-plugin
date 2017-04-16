@@ -1,3 +1,7 @@
 dependencies:
   override:
     - ./build.sh
+    
+test:
+  override:
+    - echo "No tests yet do this makes circleci not failing"
