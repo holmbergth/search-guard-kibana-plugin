@@ -4,15 +4,18 @@ dependencies:
     #- curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh -o install_nvm.sh
     #- chmod +x install_nvm.sh
     #- ./install_nvm.sh || true
-    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
-    - cat ~/.profile || true
-    - cat ~/.bash_profile || true
-    - cat ~/.bashrc  || true
-    - cat ~/.nvm/nvm.sh   || true
+    #- sudo ls -la /opt/circleci/
+    #- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+    #- cat ~/.profile || true
+    #- cat ~/.bash_profile || true
+    #- cat ~/.bashrc  || true
+    #- cat ~/.nvm/nvm.sh   || true
     - command -v nvm   || true
     - nvm --version || true
-    - echo $0
-    - cd ~;ls -la
+    - . /opt/circleci/.nvm/nvm.sh; nvm --version
+    - . /opt/circleci/.nvm/nvm.sh; command -v nvm
+    #- echo $0
+    #- cd ~;ls -la
   override:
     - ./build.sh
     
