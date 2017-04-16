@@ -1,10 +1,18 @@
 dependencies:
   pre:
-    - sudo apt-get update; sudo apt-get install build-essential libssl-dev curl
-    - curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh -o install_nvm.sh
-    - sudo chmod +x install_nvm.sh
-    - sudo ./install_nvm.sh
-    - cat ~/.profile
+    - sudo apt-get update; sudo apt-get install build-essential libssl-dev curl git wget
+    #- curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh -o install_nvm.sh
+    #- chmod +x install_nvm.sh
+    #- ./install_nvm.sh || true
+    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+    - cat ~/.profile || true
+    - cat ~/.bash_profile || true
+    - cat ~/.bashrc  || true
+    - cat ~/.nvm/nvm.sh   || true
+    - command -v nvm   || true
+    - nvm --version || true
+    - echo $0
+    - cd ~;ls -la
   override:
     - ./build.sh
     
