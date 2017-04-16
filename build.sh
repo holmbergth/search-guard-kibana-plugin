@@ -2,7 +2,6 @@
 set +e
 node -v
 npm -v
-sudo find / -iname nvm 2>/dev/null
 nvm --version || true
 set -e
 ###################################

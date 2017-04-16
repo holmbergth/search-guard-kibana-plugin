@@ -17,7 +17,7 @@ dependencies:
     #- echo $0
     #- cd ~;ls -la
   override:
-    - ./build.sh
+    - . /opt/circleci/.nvm/nvm.sh;./build.sh
     
 test:
   override:
