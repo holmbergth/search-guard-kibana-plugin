@@ -1,10 +1,4 @@
 #!/bin/bash
-set +e
-export NVM_DIR="/opt/circleci/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-node -v
-npm -v
-nvm --version || true
 set -e
 ###################################
 ###################################
@@ -14,6 +8,16 @@ PLUGIN_NAME=searchguard-kibana
 ###################################
 ###################################
 KIBANA_NODE_JS_VERSION_URL="https://raw.githubusercontent.com/elastic/kibana/v$KIBANA_VERSION/.node-version"
+
+if [ -s "/opt/circleci/.nvm/nvm.sh" ]; then
+    export NVM_DIR="/opt/circleci/.nvm"
+    . "$NVM_DIR/nvm.sh"
+else
+    export NVM_DIR=~/.nvm
+    mkdir -p $NVM_DIR
+    . $(brew --prefix nvm)/nvm.sh
+fi
+
 echo "Building $PLUGIN_NAME-$PLUGIN_VERSION.zip"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
@@ -39,5 +43,5 @@ cd $DIR
 mkdir -p releases/$PLUGIN_VERSION/
 cp build/$PLUGIN_NAME-$PLUGIN_VERSION.zip releases/$PLUGIN_VERSION/
 echo "Created releases/$PLUGIN_VERSION/$PLUGIN_NAME-$PLUGIN_VERSION.zip"
-SHA256="$(sha256sum build/$PLUGIN_NAME-$PLUGIN_VERSION.zip)"
-echo "SHA256: $SHA256"
+command -v shasum > /dev/null && shasum -a 256 build/$PLUGIN_NAME-$PLUGIN_VERSION.zip
+command -v sha256sum > /dev/null && sha256sum build/$PLUGIN_NAME-$PLUGIN_VERSION.zip
