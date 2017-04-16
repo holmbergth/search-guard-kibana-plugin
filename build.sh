@@ -1,4 +1,7 @@
 #!/bin/bash
+set +e
+sudo find / -iname nvm 2>/dev/null
+nvm --version || true
 set -e
 ###################################
 ###################################
