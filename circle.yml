@@ -1,6 +1,6 @@
 dependencies:
   pre:
-    - sudo apt-get update; sudo apt-get install build-essential libssl-dev curl git wget
+    #- sudo apt-get update; sudo apt-get install build-essential libssl-dev curl git wget
     #- curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh -o install_nvm.sh
     #- chmod +x install_nvm.sh
     #- ./install_nvm.sh || true
@@ -10,14 +10,14 @@ dependencies:
     #- cat ~/.bash_profile || true
     #- cat ~/.bashrc  || true
     #- cat ~/.nvm/nvm.sh   || true
-    - command -v nvm   || true
-    - nvm --version || true
-    - . /opt/circleci/.nvm/nvm.sh; nvm --version
-    - . /opt/circleci/.nvm/nvm.sh; command -v nvm
+    #- command -v nvm   || true
+    #- nvm --version || true
+    #- . /opt/circleci/.nvm/nvm.sh; nvm --version
+    #- . /opt/circleci/.nvm/nvm.sh; command -v nvm
     #- echo $0
     #- cd ~;ls -la
   override:
-    - . /opt/circleci/.nvm/nvm.sh;./build.sh
+    - ./build.sh
     
 test:
   override:
